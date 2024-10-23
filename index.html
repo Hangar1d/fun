@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haha</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00; /* Green text for terminal effect */
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #terminal {
+            padding: 20px;
+            white-space: pre-wrap;
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        .hacked-message {
+            display: none;
+            font-size: 3rem;
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="terminal"></div>
+<div class="hacked-message" id="hackedMessage">YOU ARE HACKED BY KH4N</div>
+
+<script>
+    const terminal = document.getElementById('terminal');
+    const hackedMessage = document.getElementById('hackedMessage');
+
+    // Array of fake terminal lines to simulate running commands
+    const fakeCommands = [
+        "[SYSTEM] Initializing hack tool...",
+        "[USER] Loading target IP address...",
+        "[SYSTEM] IP found: 192.168.1.100",
+        "[SYSTEM] Attempting connection...",
+        "[FIREWALL] Bypassing security protocols...",
+        "[ALERT] Firewall bypassed!",
+        "[USER] Gaining root access...",
+        "[SYSTEM] Root access granted.",
+        "[MALWARE] Uploading malware to system...",
+        "[MALWARE] Malware.exe successfully uploaded.",
+        "[USER] Executing payload...",
+        "[SYSTEM] Payload running...",
+        "[LOG] Deleting security logs...",
+        "[BACKDOOR] Establishing backdoor entry...",
+        "[SYSTEM] Backdoor access created!",
+        "[MALWARE] Initiating remote control...",
+        "[USER] Downloading files...",
+        "[USER] Files downloaded: confidential_data.zip",
+        "[SYSTEM] Shutting down defenses...",
+        "[ALERT] Target system compromised!",
+        "[SYSTEM] Sending signal to main server...",
+        "[ERROR] System32 detected, preparing to delete...",
+        "[USER] Hacking complete...",
+        "[LOG] Target system fully compromised.",
+        "[USER] Shutting down terminal...",
+        "[SYSTEM] Disconnecting..."
+    ];
+
+    let currentIndex = 0;
+
+  
+    function addCommand() {
+        if (currentIndex < fakeCommands.length) {
+            terminal.innerHTML += fakeCommands[currentIndex] + '\n';
+            currentIndex++;
+            setTimeout(addCommand, 200); // Delay between commands (faster now)
+        } else {
+            showHackedMessage();
+        }
+    }
+
+    function showHackedMessage() {
+        setTimeout(() => {
+            terminal.style.display = 'none'; // Hide terminal
+            hackedMessage.style.display = 'block'; // Show hacked message
+        }, 1500); // Show the hacked message after 1.5 seconds
+    }
+
+    // Start simulating the terminal
+    setTimeout(addCommand, 200); // Start the "hacking" sequence after 0.5 seconds
+</script>
+
+</body>
+</html>
