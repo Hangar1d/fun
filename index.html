@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haha</title>
+    <title>Terminal Hack</title>
     <style>
         body {
             background-color: black;
@@ -11,20 +11,43 @@
             font-family: 'Courier New', Courier, monospace;
             margin: 0;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         #terminal {
+            width: 90%;
+            max-width: 800px;
+            height: 80vh;
+            overflow-y: scroll;
             padding: 20px;
             white-space: pre-wrap;
-            font-size: 1.2rem;
-            line-height: 1.5;
+            font-size: 0.9rem; /* Smaller font for realism */
+            line-height: 1.2;
         }
 
         .hacked-message {
             display: none;
-            font-size: 3rem;
+            font-size: 2.5rem;
             text-align: center;
             color: red;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.1; }
+            100% { opacity: 1; }
+        }
+
+        /* Adding a blinking cursor effect */
+        .cursor {
+            display: inline-block;
+            background-color: #00ff00;
+            width: 10px;
+            height: 20px;
+            animation: blink 1s step-end infinite;
         }
     </style>
 </head>
@@ -33,9 +56,13 @@
 <div id="terminal"></div>
 <div class="hacked-message" id="hackedMessage">YOU ARE HACKED BY KH4N</div>
 
+<!-- Add the sound file here -->
+<audio id="hackSound" src="sound.wav"></audio>
+
 <script>
     const terminal = document.getElementById('terminal');
     const hackedMessage = document.getElementById('hackedMessage');
+    const hackSound = document.getElementById('hackSound'); // Sound element
 
     // Array of fake terminal lines to simulate running commands
     const fakeCommands = [
@@ -52,6 +79,10 @@
         "[USER] Executing payload...",
         "[SYSTEM] Payload running...",
         "[LOG] Deleting security logs...",
+        "[INSTALL] Installing malware packages...",
+        "[INSTALL] Progress: █████░░░░░░░ 40%",
+        "[INSTALL] Progress: ████████████░░ 80%",
+        "[INSTALL] Completed...",
         "[BACKDOOR] Establishing backdoor entry...",
         "[SYSTEM] Backdoor access created!",
         "[MALWARE] Initiating remote control...",
@@ -67,28 +98,34 @@
         "[SYSTEM] Disconnecting..."
     ];
 
+    // Rapid command spam (this will make unreadable lines)
+    const rapidCommands = "executing command x100\n".repeat(100); 
+
     let currentIndex = 0;
 
-  
     function addCommand() {
         if (currentIndex < fakeCommands.length) {
             terminal.innerHTML += fakeCommands[currentIndex] + '\n';
             currentIndex++;
-            setTimeout(addCommand, 200); // Delay between commands (faster now)
+            setTimeout(addCommand, 100); // Fast command output
         } else {
-            showHackedMessage();
+            addRapidCommands(); // After regular commands, add the rapid ones
         }
     }
 
+    function addRapidCommands() {
+        terminal.innerHTML += rapidCommands; // Adding rapid unreadable lines
+        setTimeout(showHackedMessage, 1000); // Wait for 1 second and show hacked message
+    }
+
     function showHackedMessage() {
-        setTimeout(() => {
-            terminal.style.display = 'none'; // Hide terminal
-            hackedMessage.style.display = 'block'; // Show hacked message
-        }, 1500); // Show the hacked message after 1.5 seconds
+        terminal.style.display = 'none'; // Hide terminal
+        hackedMessage.style.display = 'block'; // Show hacked message
+        hackSound.play(); // Play the sound
     }
 
     // Start simulating the terminal
-    setTimeout(addCommand, 200); // Start the "hacking" sequence after 0.5 seconds
+    setTimeout(addCommand, 500); // Start the "hacking" sequence after 0.5 seconds
 </script>
 
 </body>
